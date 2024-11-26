@@ -1,0 +1,27 @@
+class Solution:
+    def findPermutation(self, s):
+        # Code here
+        
+        def permute(ip , start):
+            
+            if start == len(ip) -1:
+                ans.append(ip)
+                return
+            
+            d = set()
+            for i in range(start , len(ip)):
+                if ip[i] not in d:
+                    d.add(ip[i])
+                    char_list = list(ip)
+                    char_list[start] , char_list[i] = char_list[i], char_list[start]
+                    ip = "".join(char_list)
+                    permute(ip, start +1)
+                    char_list = list(ip)
+                    char_list[i] , char_list[start] = char_list[start], char_list[i]
+                    ip = "".join(char_list)
+                    
+
+        
+        ans = []
+        permute(s, 0)
+        return ans
