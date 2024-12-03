@@ -1,0 +1,48 @@
+#User function Template for python3
+class paths:
+    def __init__(self, dir, x , y):
+        self.dir = dir
+        self.x = x
+        self.y = y
+    
+        
+
+class Solution:
+    # Function to find all possible paths
+
+    
+        
+    def findPath(self, mat):
+        n = len(mat)
+        path = []
+        path.append(paths("U", -1, 0))
+        path.append(paths("D", 1 , 0))
+        path.append(paths("L", 0 , -1))
+        path.append(paths("R", 0 , 1))
+        ans = []
+        
+        def validPath(x , y , mat):
+            if x >= 0 and x < n and y >= 0 and y < n and mat[x][y]==1:
+                return True
+            return False
+    
+        def fun( mat , x , y, currPath):
+            if x == n -1 and y == n-1:
+                ans.append(currPath[:])
+                
+            
+            for i in path:
+                new_x = x + i.x 
+                new_y = y + i.y
+                if validPath( new_x , new_y , mat):
+                    mat[x][y] = 0
+                    currPath += i.dir
+                    fun(mat, new_x , new_y, currPath) 
+                    mat[x][y] = 1
+                    currPath = currPath[:len(currPath)-1]
+                    
+        fun(mat, 0, 0, "")
+        ans.sort()
+        return ans
+        
+        
