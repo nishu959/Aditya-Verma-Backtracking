@@ -1,0 +1,19 @@
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        ans = []
+        def fun(s , idx, path):
+            if idx == len(s):
+                ans.append(path[:])
+
+            p_s = ""
+            for i in range(idx, len(s)):
+                p_s += s[i]
+                if p_s == p_s[::-1]:
+                    path.append(p_s)
+                    fun(s, i+1 ,path)
+                    path.pop()
+
+        fun(s, 0, [])
+        return ans
+                
+        
