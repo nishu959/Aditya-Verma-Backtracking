@@ -1,0 +1,33 @@
+s= "catsanddogs"    
+d = ["cat", "and", "sand", "dogs", "cats"]
+n = len(s)
+ans = []
+
+def inDict(ele):
+  if ele in d:
+    return True
+  return False
+  
+
+
+def fun(op, idx):
+  if idx == n:
+    ans.append(op[:])
+    return 
+    
+  
+  for i in range(idx, n):
+    if inDict(s[idx:i+1]):
+      op.append(s[idx:i+1])
+      fun(op, i+1)
+      op.pop()
+ 
+
+ 
+fun([], 0)
+print(ans)
+  
+
+
+
+
