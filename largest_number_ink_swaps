@@ -1,0 +1,47 @@
+#User function Template for python3
+
+class Solution:
+    
+    #Function to find the largest number after k swaps.
+    def findMaximumNum(self,s,k):
+        
+        self.res = s
+        
+        def getMax(s, start):
+            m = s[start]
+            for i in range(start , len(s)):
+                m = max(s[i], m)
+            return m
+        
+        
+        def solve(s, k, start):
+            
+            if k ==0 or start == len(s)-1:
+                return
+            
+            MAX = getMax(s, start)
+            for i in range(start+1 , len(s)):
+
+                if (s[i]>s[start] and s[i]==MAX):
+                    
+                    char_list = list(s)
+                    char_list[start] , char_list[i] = char_list[i], char_list[start]
+                    s = "".join(char_list)
+                    
+                    if s > self.res:
+                        self.res = s
+                        
+                    
+                    solve(s , k -1 , start+1)
+                    char_list = list(s)
+                    char_list[start] , char_list[i] = char_list[i], char_list[start]
+                    s = "".join(char_list)
+                
+            solve(s , k , start + 1)
+        
+        
+        solve(s, k, 0)    
+        return self.res
+                
+        #code here
+
