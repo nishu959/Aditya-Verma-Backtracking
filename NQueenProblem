@@ -1,0 +1,49 @@
+class Solution:
+    def nQueen(self, n):
+        
+        ans = []
+        
+        def check(mat , row , col):
+            for i in range(col):
+                if mat[row][i] == 1:
+                    return False
+                    
+            
+            a = row
+            b = col
+            while a>= 0 and b>=0:
+                if mat[a][b] ==1:
+                    return False
+                a -= 1
+                b -= 1
+                    
+            a = row
+            b = col
+            while a<n and b>=0:
+                if mat[a][b]==1:
+                    return False
+                a += 1
+                b -= 1
+            
+            return True
+            
+        def fun(mat , idx ,op):
+            if idx == n :
+                ans.append(op[:])
+                return
+            
+            for i in range(n):
+                if check(mat, i , idx):
+                    mat[i][idx] = 1
+                    op.append(i + 1)
+                    fun(mat , idx + 1, op)
+                    mat[i][idx] = 0
+                    op.pop()
+                
+            
+            
+            
+            
+        mat = [[0 for i in range(n)] for j in range(n)]
+        fun(mat , 0 , [])
+        return ans
